@@ -1,6 +1,7 @@
 export default interface BookEntity{
-    id: String
-    name: String
-    author: String
-    favorite: boolean
+    id: string
+    name: string
+    author: string
+    rating: number
+    isLike?: boolean
 }

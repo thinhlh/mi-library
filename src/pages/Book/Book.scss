@@ -1,5 +1,4 @@
 #book-container {
-    // background-color: blue;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -8,7 +7,7 @@
         font-size: 20px;
     }
 
-    width: 100px;
+    width: 200px;
 }
 
 #book-cover {
@@ -18,6 +17,7 @@
 }
 
 #book-metadata {
+    width: 100%;
     margin-top: 1rem;
     display: flex;
     
@@ -34,10 +34,6 @@
 }
 
 #book-favorite-icon {
-    width: 1rem;
-    height: 1rem;
-}
-
-#book-favorite-icon:hover{
-    background-color: red;
+    width: 15px;
+    height: 15px;
 }

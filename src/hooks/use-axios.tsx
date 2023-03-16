@@ -1,24 +1,33 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
+import { BACKEND_URL } from "../config/constants"
 
-export default function useAxios(path: string, method: string, body: any = null) {
+export type HttpMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE"
 
-    const [data, setData] = useState<any[] | null>(null)
+export function useAxios<T>() {
+
+    const [data, setData] = useState<T | null>(null)
     const [err, setErr] = useState('')
     const [loading, setLoading] = useState(true)
 
-    useEffect(() => {
-        axios.request({
-            method: method,
-            url: 'http://localhost:3001/api/v1' + path,
-        }).then(({ data }) => {
-            setData(data)
-        }).catch(err => {
-            setErr(err.toString())
-        }).finally(() => {
-            setLoading(false)
-        })
-    }, [])
 
-    return { data, err, loading }
+    const operation = async (path: string, method: HttpMethod, body: any = null) => {
+        try {
+            console.log(path)
+            setLoading(true)
+            const response = await axios.request({
+                method: method,
+                url: path,
+                data: body,
+                baseURL: BACKEND_URL,
+            })
+            setData(response.data)
+        } catch (e: any) {
+            setErr(e.toString)
+        } finally {
+            setLoading(false)
+        }
+    }
+
+    return { data, err, loading, operation }
 }
